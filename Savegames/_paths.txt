@@ -1,0 +1,7 @@
+Lista de paths utiles utilizando variables de entorno
+
+C:\Users\{username}\AppData\Roaming -> %APPDATA%
+C:\Users\{username}\AppData\Local -> %LOCALAPPDATA%
+C:\Users\{username} -> %HOMEDRIVE%\%HOMEPATH%
+C:\Users\{username} -> %USERPROFILE%
+

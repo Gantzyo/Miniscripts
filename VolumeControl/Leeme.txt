@@ -1,0 +1,9 @@
+Para ejecutar estos scripts necesitas NirCmd:
+http://www.nirsoft.net/utils/index.html
+
+Puedes ejecutar los accesos directos o los .ahk si lo prefieres
+
+- Pon el volumen dentro de la aplicación al máximo y deja que windows lo regule
+- El volumen aumenta/disminuye un 5% del volumen maximo
+- El volumen no puede exceder el máximo establecido por windows, es decir, si tienes el volumen del sistema al 70%, se suma/resta 3.5%
+- Se recomienda usar algún programa de macros para esta tarea

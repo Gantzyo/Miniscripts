@@ -1,0 +1,3 @@
+"%SAVEGAMEDIR%\Stats.bin"
+"%SAVEGAMEDIR%\Achievements.bin"
+"%SAVEGAMEDIR%\Storage"

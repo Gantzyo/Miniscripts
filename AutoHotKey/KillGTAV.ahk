@@ -1,0 +1,1 @@
+^+z::Run, taskkill /IM "GTA5.exe" /F
