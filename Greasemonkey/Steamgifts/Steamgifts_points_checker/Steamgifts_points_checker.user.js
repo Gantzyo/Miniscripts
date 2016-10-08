@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/Steamgifts_points_checker.user.js
 // @include         https://www.steamgifts.com/*
-// @version         1.0.4
+// @version         1.0.5
 // @grant           GM_addStyle
 // @grant           GM_getResourceText
 // @grant           GM_openInTab
@@ -46,14 +46,26 @@ $('div.giveaway__row-inner-wrap:not(.is-faded)').each(function () {
 // Calculate which giveaways are joinable and which aren't
 checkJoinableGiveaways();
 
+// Prevent default links events
+$("a.giveaway__heading__name").click(function (e) {
+    e.preventDefault();
+});
+
 // When a giveaway is automatically joined recalculate which giveaways are joinable and which aren't
 // Also track points without needing to reload page
 $("a.giveaway__heading__name").mousedown(function (e) {
-    if (e.ctrlKey || e.which == 2) {
+    
+    /**
+     * ctrlKey -> CONTROL
+     * shiftKey -> SHIFT
+     * metaKey -> CMD (MAC)
+     * which = 1 -> Left Mouse Button
+     * which = 2 -> Middle Mouse Button
+     */
+    if (e.ctrlKey || e.shiftKey || e.metaKey || e.which === 1 || e.which === 2) {
         var $parent = $(this).closest('div.giveaway__row-outer-wrap');
 
         if ($parent.hasClass('SGPC_joinable')) {
-            e.preventDefault();
             var totalpoints = $("span.nav__points").html();
             var points = cleanPointsString($parent.find('span.giveaway__heading__thin').html());
 
@@ -64,7 +76,7 @@ $("a.giveaway__heading__name").mousedown(function (e) {
             $parent.addClass('is-faded');
 
             checkJoinableGiveaways();
-            
+
             var openInBackground = true;
             GM_openInTab($(this).attr("href"), openInBackground);
         }
