@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/Steamgifts_points_checker.user.js
 // @include         https://www.steamgifts.com/*
-// @version         1.0.5
+// @version         1.0.6
 // @grant           GM_addStyle
 // @grant           GM_getResourceText
 // @grant           GM_openInTab
@@ -22,7 +22,7 @@ function cleanPointsString(string) {
 function checkJoinableGiveaways() {
     $('div.giveaway__row-outer-wrap.SGPC_joinable').each(function () {
         var $this = $(this);
-        var points = cleanPointsString($this.find('span.giveaway__heading__thin:last-of-type').html());
+        var points = cleanPointsString($this.find('span.giveaway__heading__thin').last().html());
         var totalpoints = $("span.nav__points").html();
         if (totalpoints - points < 0) {
             $this.removeClass('SGPC_joinable');
@@ -76,9 +76,9 @@ $("a.giveaway__heading__name").mousedown(function (e) {
             $parent.addClass('is-faded');
 
             checkJoinableGiveaways();
-
-            var openInBackground = true;
-            GM_openInTab($(this).attr("href"), openInBackground);
         }
+        
+        var openInBackground = true;
+        GM_openInTab($(this).attr("href"), openInBackground);
     }
 });
