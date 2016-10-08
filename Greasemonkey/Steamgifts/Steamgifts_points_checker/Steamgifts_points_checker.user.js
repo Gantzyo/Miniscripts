@@ -1,10 +1,15 @@
 // ==UserScript==
-// @name        Steamgifts points checker
-// @namespace   https://www.steamgifts.com/
-// @include     https://www.steamgifts.com/*
-// @version     1.0.0
-// @grant       GM_addStyle
-// @require     https://code.jquery.com/jquery-3.1.1.min.js
+// @name            Steamgifts points checker
+// @namespace       https://www.steamgifts.com/
+// @homepageURL     https://github.com/Gantzyo/Miniscripts/tree/master/Greasemonkey/Steamgifts/Steamgifts_points_checker
+// @supportURL      https://github.com/Gantzyo/Miniscripts/issues
+// @updateURL       https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/Steamgifts_points_checker.meta.js
+// @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/Steamgifts_points_checker.user.js
+// @include         https://www.steamgifts.com/*
+// @version         1.0.1
+// @grant           GM_addStyle
+// @require         https://code.jquery.com/jquery-3.1.1.min.js
+// @resource        styles https://raw.githubusercontent.com/Gantzyo/Miniscripts/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/resources/styles.css
 // ==/UserScript==
 
 
@@ -26,9 +31,7 @@ function checkJoinableGiveaways() {
 }
 
 // --- STYLES
-GM_addStyle("header {position: fixed !important; left:0 !important; right:0 !important; margin: 0 auto !important; z-index: 1 !important;}"); // Header always visible
-GM_addStyle(".SGPC_nonJoinable {background: rgba(255,0,0,0.1) !important;}");
-GM_addStyle(".SGPC_joinable {background: rgba(0,255,0,0.1) !important;}");
+GM_addStyle(GM_getResourceURL("styles"));
 
 
 // --- SCRIPT
