@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_auto_join/Steamgifts_auto_join.user.js
 // @include         https://www.steamgifts.com/giveaway/*
-// @version         1.0.2
+// @version         1.0.4
 // @grant           GM_getValue
 // @grant           GM_setValue
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
@@ -33,5 +33,5 @@ setTimeout(function() {
     if(!$('.sidebar__entry-insert').hasClass('is-hidden')) {
      $('.sidebar__entry-insert').click();
     }
-}, getRandomInt(250, 2500)); // Random delay before pressing the button
+}, getRandomInt(125, 250)); // Random delay before pressing the button
 
