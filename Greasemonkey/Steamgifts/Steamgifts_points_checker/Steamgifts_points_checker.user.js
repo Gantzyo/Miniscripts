@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/Steamgifts_points_checker.user.js
 // @include         https://www.steamgifts.com/*
-// @version         1.0.6
+// @version         1.0.7
 // @grant           GM_addStyle
 // @grant           GM_getResourceText
 // @grant           GM_openInTab
@@ -67,7 +67,7 @@ $("a.giveaway__heading__name").mousedown(function (e) {
 
         if ($parent.hasClass('SGPC_joinable')) {
             var totalpoints = $("span.nav__points").html();
-            var points = cleanPointsString($parent.find('span.giveaway__heading__thin').html());
+            var points = cleanPointsString($parent.find('span.giveaway__heading__thin').last().html());
 
             totalpoints -= points;
 
