@@ -1,0 +1,15 @@
+header { /* Header always visible */
+    position: fixed !important;
+    left:0 !important;
+    right:0 !important;
+    margin: 0 auto !important;
+    z-index: 1 !important;
+}
+
+.SGPC_nonJoinable {
+    background: rgba(255,0,0,0.1) !important; /* Red */
+}
+
+.SGPC_joinable {
+    background: rgba(0,255,0,0.1) !important; /* Green */
+}
