@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/Steamgifts_points_checker.user.js
 // @include         https://www.steamgifts.com/*
-// @version         1.0.8
+// @version         1.0.9
 // @grant           GM_addStyle
 // @grant           GM_getResourceText
 // @grant           GM_openInTab
@@ -33,6 +33,9 @@ $(document).ready(function () {
 
 // --- STYLES
     GM_addStyle(GM_getResourceText("styles"));
+    
+// --- NEW ELEMENTS
+    $("body").prepend('<div class="SGPC_topWhiteSpace"></div>'); // Add an invisible div to maintain web appearance properly
 
 
 // --- SCRIPT
