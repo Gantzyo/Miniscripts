@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/srrDB/srrDB_ArchivedFilesSFV.user.js
 // @include         https://www.srrdb.com/release/details/*
-// @version         1.0.1
+// @version         1.0.2
 // @grant           GM_addStyle
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
@@ -59,8 +59,8 @@ $(document).ready(function () {
     // -------------- GENERATE DOWNLOAD FILE
     // Extract data
     $files.each(function () {
-        var fileName = $(this).find("td:first").text().trim();
-        var crc = $(this).find("td.release-crc").text().trim().split(" ")[0];
+        var fileName = $(this).find("td:first").text().trim().split(" ")[0];
+        var crc = $(this).find("td.release-crc").text().trim();
         if (crc !== "00000000") { // Ignore folders
             $generatedString += fileName + " " + crc + "\r\n";
         }
