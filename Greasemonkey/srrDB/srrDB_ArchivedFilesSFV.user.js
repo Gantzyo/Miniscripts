@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/srrDB/srrDB_ArchivedFilesSFV.user.js
 // @include         https://www.srrdb.com/release/details/*
-// @version         1.0.3
+// @version         1.1.0
 // @grant           GM_addStyle
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
@@ -43,6 +43,10 @@ $(document).ready(function () {
     var $archivedFilesTable = $archivedFilesLabel.next(".subhover").find("table > tbody");
     var $files = $archivedFilesTable.find("tr");
     var $generatedString = "";
+	
+	if($(".alert-error").text().match('This file is unconfirmed')) {
+		$releaseName = '[UNCONFIRMED]' + $releaseName;
+	}
     
 
 
