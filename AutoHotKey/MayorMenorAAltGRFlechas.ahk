@@ -1,0 +1,2 @@
+<^>!Left::SendInput <
+<^>!Right::SendInput >
