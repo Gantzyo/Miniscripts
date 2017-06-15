@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @include         https://twitter.com/*
 // @description     Refresca la timeline automáticamente cada 10 segundos
-// @version         1.0.0
+// @version         1.0.1
 // @grant           GM_addStyle
 // @grant           GM_getValue
 // @grant           GM_setValue
