@@ -24,7 +24,8 @@ $(document).ready(function () {
     var autorefresh;
     
     // Autorefresh button
-    $("#global-actions").append("<li><span id='tar_refreshBtn' class='Icon Icon--refresh Icon--large btn'></span></li>"); // Color classes: primary-btn u-bgUserColor
+    // $("#global-actions").append("<li><span id='tar_refreshBtn' class='Icon Icon--refresh Icon--large btn'></span></li>"); // Bugged icon
+    $("#global-actions").append("<li><span id='tar_refreshBtn' class='Icon Icon--lightning Icon--large btn'></span></li>"); // Color classes: primary-btn u-bgUserColor
 
     // Configuration of the observer:
     var $config = {
