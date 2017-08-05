@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @include         https://twitter.com/*
 // @description     Refresca la timeline automáticamente cada 10 segundos
-// @version         1.0.1
+// @version         1.1.0
 // @grant           GM_addStyle
 // @grant           GM_getValue
 // @grant           GM_setValue
@@ -17,15 +17,15 @@ $(document).ready(function () {
     // -------------- STYLES
     GM_addStyle("#tar_refreshBtn {padding: 0px 0px !important;}");
     GM_addStyle(".tar_recolorBtnBorder {border-color: rgba(0,0,0,0) !important;}");// Transparent border
-    
-    
-    
+
+
+
     // -------------- VARIABLES AND CONFIG
-    var autorefresh;
-    
+    var autorefresh = GM_getValue("autorefresh", false);// False by default
+
     // Autorefresh button
-    // $("#global-actions").append("<li><span id='tar_refreshBtn' class='Icon Icon--refresh Icon--large btn'></span></li>"); // Bugged icon
-    $("#global-actions").append("<li><span id='tar_refreshBtn' class='Icon Icon--lightning Icon--large btn'></span></li>"); // Color classes: primary-btn u-bgUserColor
+    $("#global-actions").append("<li><span id='tar_refreshBtn' class='Icon Icon--refresh Icon--large btn'></span></li>"); // Bugged icon
+    // $("#global-actions").append("<li><span id='tar_refreshBtn' class='Icon Icon--lightning Icon--large btn'></span></li>"); // Color classes: primary-btn u-bgUserColor
 
     // Configuration of the observer:
     var $config = {
@@ -33,9 +33,9 @@ $(document).ready(function () {
     };
 
     var $target = $("div.stream-item.js-new-items-bar-container")[0];
-    
-    
-    
+
+
+
     // -------------- FUNCTIONS
     function setButtonStyles() {
         if (autorefresh) {
@@ -44,9 +44,16 @@ $(document).ready(function () {
             $("#tar_refreshBtn").removeClass("primary-btn u-bgUserColor tar_recolorBtnBorder");
         }
     }
-    
-    
-    
+
+    function decideObserverStatus() {
+        if (autorefresh) {
+            observer.observe($target, $config); // Start the observer
+        } else {
+            observer.disconnect();
+        }
+    }
+
+
     // -------------- TRIGGERS
     // Create an observer instance
     var observer = new MutationObserver(function (mutations) {
@@ -80,16 +87,14 @@ $(document).ready(function () {
         autorefresh = !autorefresh;
         $(window).scroll();// Trigger scroll event to click new tweets if necessary
         setButtonStyles();
-        GM_setValue("autorefresh",autorefresh);
+        decideObserverStatus();
+        GM_setValue("autorefresh", autorefresh);
     });
-    
-    
-    
+
+
+
     // -------------- INIT
     // Pass in the target node, as well as the observer options
-    if ($target) {
-        observer.observe($target, $config); // Start the observer
-    }
-    autorefresh = GM_getValue("autorefresh", false);// False by default
+    decideObserverStatus();
     setButtonStyles();
 });
