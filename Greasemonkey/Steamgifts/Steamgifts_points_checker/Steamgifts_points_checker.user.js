@@ -5,7 +5,7 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/Steamgifts_points_checker.user.js
 // @include         https://www.steamgifts.com/*
-// @version         1.1.0
+// @version         1.1.1
 // @grant           GM_openInTab
 // @grant           GM.openInTab
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
@@ -92,7 +92,7 @@ $(document).ready(function () {
             }
 
             var openInBackground = true;
-            GM.openInTab($(this).attr("href"), openInBackground);
+            GM.openInTab("https://www.steamgifts.com"+$(this).attr("href"), openInBackground);
         }
     });
 });
