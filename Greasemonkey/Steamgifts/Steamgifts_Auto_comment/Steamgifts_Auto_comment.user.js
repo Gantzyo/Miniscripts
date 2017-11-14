@@ -5,11 +5,9 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_Auto_comment/Steamgifts_Auto_comment.user.js
 // @include         https://www.steamgifts.com/giveaway/*
-// @version         1.0.4
-// @grant           GM_addStyle
-// @grant           GM_getResourceText
+// @version         1.1.0
+// @grant           none
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
-// @resource        styles https://raw.githubusercontent.com/Gantzyo/Miniscripts/master/Greasemonkey/Steamgifts/Steamgifts_Auto_comment/resources/styles.css
 // ==/UserScript==
 
 /*
@@ -53,7 +51,17 @@ $(document).ready(function () {
         " <3"
     ];
 
+// FUNCTIONS
 
+function addGlobalStyle(css) {
+    var head, style;
+    head = document.getElementsByTagName('head')[0];
+    if (!head) { return; }
+    style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = css;
+    head.appendChild(style);
+}
 
 // SCRIPT STARTS HERE
 
@@ -89,7 +97,7 @@ $(document).ready(function () {
     }
 
 // Auto comment button styles
-    GM_addStyle(GM_getResourceText("styles"));
+    addGlobalStyle('.SGAC_autoComment{cursor:pointer;margin-bottom:10px;border-color:#1c467d;color:#fff;background-image:linear-gradient(#7BA7E1 0,#2966B8 100%);background-image:-moz-linear-gradient(#7BA7E1 0,#2966B8 100%);background-image:-webkit-linear-gradient(#7BA7E1 0,#2966B8 100%);text-shadow:1px 1px 1px rgba(100,100,255,.7);border-style:solid;border-width:1px;display:block;font:700 13px/32px "Open Sans",sans-serif;padding:0 15px;text-align:center;border-radius:4px}.SGAC_margin{margin-left:15px}.SGAC_autoComment label{margin:-1px -16px!important;display:block;cursor:pointer}.SGAC_autoComment input{width:5%!important}');
 
 // Auto comment checkbox
     $('.sidebar__entry-loading').after('<div class="SGAC_autoComment" id="SGAC_DefCheckbox"><label><input type="checkbox"/> Send message</label></div>');

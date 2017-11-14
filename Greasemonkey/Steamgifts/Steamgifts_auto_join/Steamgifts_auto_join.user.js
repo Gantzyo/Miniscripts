@@ -5,9 +5,8 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_auto_join/Steamgifts_auto_join.user.js
 // @include         https://www.steamgifts.com/giveaway/*
-// @version         1.0.6
-// @grant           GM_getValue
-// @grant           GM_setValue
+// @version         1.1.0
+// @grant           none
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
 

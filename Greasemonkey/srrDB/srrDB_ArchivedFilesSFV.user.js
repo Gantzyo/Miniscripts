@@ -5,8 +5,8 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/srrDB/srrDB_ArchivedFilesSFV.user.js
 // @include         https://www.srrdb.com/release/details/*
-// @version         1.1.0
-// @grant           GM_addStyle
+// @version         1.2.0
+// @grant           none
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
 
@@ -16,8 +16,21 @@
 
 $(document).ready(function () {
 
+    // -------------- FUNCTIONS
+    function addGlobalStyle(css) {
+        var head, style;
+        head = document.getElementsByTagName('head')[0];
+        if (!head) {
+            return;
+        }
+        style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = css;
+        head.appendChild(style);
+    }
+
     // -------------- STYLES
-    GM_addStyle(".srrDB_AFSFV_storedFile { cursor:pointer;}");
+    addGlobalStyle(".srrDB_AFSFV_storedFile { cursor:pointer;}");
 
 
 

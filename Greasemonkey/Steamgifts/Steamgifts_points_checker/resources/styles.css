@@ -18,3 +18,10 @@ header { /* Header always visible */
 .SGPC_topWhiteSpace {
     height: 34px;
 }
+
+/* 
+Minified using https://cssminifier.com/
+
+MINIFIED: 
+header{position:fixed!important;left:0!important;right:0!important;top:0!important;margin:0 auto!important;z-index:1!important}.SGPC_nonJoinable{background:rgba(255,0,0,.1)!important}.SGPC_joinable{background:rgba(0,255,0,.1)!important}.SGPC_topWhiteSpace{height:34px}
+*/

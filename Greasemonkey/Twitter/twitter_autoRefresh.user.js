@@ -5,23 +5,37 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @include         https://twitter.com/*
 // @description     Refresca la timeline automáticamente cada 10 segundos
-// @version         1.1.0
-// @grant           GM_addStyle
+// @version         1.2.0
 // @grant           GM_getValue
 // @grant           GM_setValue
+// @grant           GM.getValue
+// @grant           GM.setValue
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
 
 $(document).ready(function () {
 
+    // -------------- FUNCTIONS
+    function addGlobalStyle(css) {
+        var head, style;
+        head = document.getElementsByTagName('head')[0];
+        if (!head) {
+            return;
+        }
+        style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = css;
+        head.appendChild(style);
+    }
+
     // -------------- STYLES
-    GM_addStyle("#tar_refreshBtn {padding: 0px 0px !important;}");
-    GM_addStyle(".tar_recolorBtnBorder {border-color: rgba(0,0,0,0) !important;}");// Transparent border
+    addGlobalStyle("#tar_refreshBtn {padding: 0px 0px !important;}");
+    addGlobalStyle(".tar_recolorBtnBorder {border-color: rgba(0,0,0,0) !important;}");// Transparent border
 
 
 
     // -------------- VARIABLES AND CONFIG
-    var autorefresh = GM_getValue("autorefresh", false);// False by default
+    var autorefresh = GM.getValue("autorefresh", false);// False by default
 
     // Autorefresh button
     $("#global-actions").append("<li><span id='tar_refreshBtn' class='Icon Icon--refresh Icon--large btn'></span></li>"); // Bugged icon
@@ -88,7 +102,7 @@ $(document).ready(function () {
         $(window).scroll();// Trigger scroll event to click new tweets if necessary
         setButtonStyles();
         decideObserverStatus();
-        GM_setValue("autorefresh", autorefresh);
+        GM.setValue("autorefresh", autorefresh);
     });
 
 

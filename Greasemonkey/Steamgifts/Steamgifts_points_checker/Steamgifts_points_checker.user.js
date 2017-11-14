@@ -5,16 +5,26 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/Steamgifts_points_checker.user.js
 // @include         https://www.steamgifts.com/*
-// @version         1.0.9
-// @grant           GM_addStyle
-// @grant           GM_getResourceText
+// @version         1.1.0
 // @grant           GM_openInTab
+// @grant           GM.openInTab
 // @require         https://code.jquery.com/jquery-3.1.1.min.js
-// @resource        styles https://raw.githubusercontent.com/Gantzyo/Miniscripts/master/Greasemonkey/Steamgifts/Steamgifts_points_checker/resources/styles.css
 // ==/UserScript==
 
 $(document).ready(function () {
 // --- FUNCTIONS
+    function addGlobalStyle(css) {
+        var head, style;
+        head = document.getElementsByTagName('head')[0];
+        if (!head) {
+            return;
+        }
+        style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = css;
+        head.appendChild(style);
+    }
+
     function cleanPointsString(string) {
         return string.replace("(", "").replace("P)", "");
     }
@@ -32,8 +42,8 @@ $(document).ready(function () {
     }
 
 // --- STYLES
-    GM_addStyle(GM_getResourceText("styles"));
-    
+    addGlobalStyle('header{position:fixed!important;left:0!important;right:0!important;top:0!important;margin:0 auto!important;z-index:1!important}.SGPC_nonJoinable{background:rgba(255,0,0,.1)!important}.SGPC_joinable{background:rgba(0,255,0,.1)!important}.SGPC_topWhiteSpace{height:34px}');
+
 // --- NEW ELEMENTS
     $("body").prepend('<div class="SGPC_topWhiteSpace"></div>'); // Add an invisible div to maintain web appearance properly
 
@@ -82,7 +92,7 @@ $(document).ready(function () {
             }
 
             var openInBackground = true;
-            GM_openInTab($(this).attr("href"), openInBackground);
+            GM.openInTab($(this).attr("href"), openInBackground);
         }
     });
 });
