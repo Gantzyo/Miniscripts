@@ -5,10 +5,14 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @include         https://chrono.gg/*
 // @description     Try to click coin each 10 minutes
+// @version         1.1.0
 // @grant           GM_notification
+// @grant           GM.notification
 // @grant           window.focus
 // @grant           GM_getValue
 // @grant           GM_setValue
+// @grant           GM.getValue
+// @grant           GM.setValue
 // @require         https://code.jquery.com/jquery-3.2.1.min.js
 // ==/UserScript==
 
@@ -25,6 +29,7 @@ $(document).ready(function () {
     var $autoRefreshTime = 10 * 60 * 1000;// min * s * ms = 10min
     var $waitForModalTime = 1 * 3 * 1000;// min * s * ms = 3s
     var $maxLoginAttempts = 3;
+    var $loginAttempts = GM.getValue("loginAttempts", 0);
 
     var notificationManuallyLogin = {
         title: 'Chrono.gg - You are not logged in',
@@ -41,8 +46,10 @@ $(document).ready(function () {
     /*--- Cross-browser Shim code follows:
      */
     function shim_GM_notification() {
+        if (typeof GM.notification === "function") {
             return;
         }
+        window.GM.notification = function (ntcOptions) {
             checkPermission();
 
             function checkPermission() {
@@ -81,37 +88,58 @@ $(document).ready(function () {
         }
     }
 
+    // -------------- CUSTOM FUNCTIONS
+
+    function isUserLoggedOut() {
+        return $("a.cd-signin").length;
+    }
+    
+    function isLoginModalOpen() {
+        return $("div.signin-modal__overlay").length;
+    }
+    
+    function isCoinClicked() {
+        return $("#reward-coin").hasClass("dead");
+    }
+
     // -------------- SCRIPT
     // Wait until login modal is loaded
 
 
     // If not logged in, try to automatically login
+    if (isUserLoggedOut()) {
         // Click coin to force login modal to get open.
         $("#reward-coin").click();
         // Wait until it's open
         setTimeout(function () {
             if ($loginAttempts >= $maxLoginAttempts) {
                 // Notify user to manually login
+                GM.notification(notificationManuallyLogin);
+            } else if (isLoginModalOpen()) {
                 // Login Modal is open, try to log in
                 $loginAttempts++; // Increase login tries
                 $("button.modal__button--login").click();
             } else {
                 // Notify user to manually login
+                GM.notification(notificationManuallyLogin);
             }
         }, $waitForModalTime);
     } else {
         if ($loginAttempts > 0) {
             $loginAttempts = 0;
+            GM.setValue("loginAttempts", $loginAttempts); // Reset login tries
         }
     }
 
     // Click coin
+    if (!isCoinClicked()) {
         $("#reward-coin").click();
     }
 
     // Refresh page automatically
     setTimeout(function () {
         if ($loginAttempts > 0) {
+            GM.setValue("loginAttempts", $loginAttempts);
         }
         location.reload();
     }, $autoRefreshTime);
