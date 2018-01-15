@@ -1,0 +1,1 @@
+Copia este archivo a la misma carpeta del ejecutable de steam (steam.exe)
