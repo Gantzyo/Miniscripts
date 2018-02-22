@@ -1,0 +1,33 @@
++--------------+
+| Extraer ROMs |
++--------------+
+
+Para extraer solo unas cuantas ROMs y copiar un MAME más liviano:
+1. Indica el nombre de las roms en el fichero "File-list.txt"
+2. Crea la estructura de directorios bestmame\roms y bestmame\samples FUERA de la carpeta de MAME
+3. Coloca el script "extraerROMS.bat" FUERA de la carpeta de MAME
+4. Deberías tener una estructura similar a esta:
+	...
+	├───bestmame
+	│   ├───roms
+	│   └───samples
+	├───MameUI64
+	│	├───artwork
+	│	├───...
+	│	├───roms
+	│	├───samples
+	│	├───...
+	│	└───titles
+	├───extraerROMS.bat
+	└───File-list.txt
+
+5. Ejecuta el script y te copiará las roms de "MameUI64\roms" y "MameUI64\samples" a la carpeta "bestmame"
+
+Puedes sacar tus listas de "MameUI64\folders\Custom.ini" y "MameUI64\folders\Favorites.ini" añadiendo '.zip' a cada entrada
+La lista que estoy usando la he sacado de: https://www.reddit.com/r/MAME/comments/2rawpr/i_compiled_several_best_ofrecommended_arcade/
+
++-----------+
+| Favoritos |
++-----------+
+
+Dejo los favoritos ya configurados en la carpeta "folders". Copiarla a "MAMEUI64\folders". En el MAME te aparecerán dentro de "Custom"
