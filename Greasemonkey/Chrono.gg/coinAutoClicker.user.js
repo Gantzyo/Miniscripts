@@ -5,10 +5,11 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @include         https://chrono.gg/*
 // @description     Try to click coin each 10 minutes
-// @version         1.1.0
+// @version         1.2.0
 // @grant           GM_notification
 // @grant           GM.notification
 // @grant           window.focus
+// @grant           console
 // @grant           GM_getValue
 // @grant           GM_setValue
 // @grant           GM.getValue
@@ -87,7 +88,30 @@ $(document).ready(function () {
             }
         }
     }
+    // -------------- STYLE FUNCTION
+    function addGlobalStyle(css) {
+        var head, style;
+        head = document.getElementsByTagName('head')[0];
+        if (!head) {
+            return;
+        }
+        style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = css;
+        head.appendChild(style);
+    }
+    
+    addGlobalStyle('.cac_modalDialog {\n\
+	position: fixed;\n\
+	left: 5px;\n\
+	bottom: 5px;\n\
+        padding: 10px;\n\
+        background-color: #fff;\n\
+        border: 1px solid black;\n\
+        color: black;\n\
+    }');
 
+    $('body').append($('<div/>', {class: 'cac_modalDialog'}).html('Last reload: <b>' + new Date() + '</b>'));
     // -------------- CUSTOM FUNCTIONS
 
     function isUserLoggedOut() {
@@ -103,44 +127,48 @@ $(document).ready(function () {
     }
 
     // -------------- SCRIPT
-    // Wait until login modal is loaded
-
-
-    // If not logged in, try to automatically login
-    if (isUserLoggedOut()) {
-        // Click coin to force login modal to get open.
-        $("#reward-coin").click();
-        // Wait until it's open
-        setTimeout(function () {
-            if ($loginAttempts >= $maxLoginAttempts) {
-                // Notify user to manually login
-                GM.notification(notificationManuallyLogin);
-            } else if (isLoginModalOpen()) {
-                // Login Modal is open, try to log in
-                $loginAttempts++; // Increase login tries
-                $("button.modal__button--login").click();
-            } else {
-                // Notify user to manually login
-                GM.notification(notificationManuallyLogin);
+    function executeScript() {
+        
+        // If not logged in, try to automatically login
+        if (isUserLoggedOut()) {
+            // Click coin to force login modal to get open.
+            $("#reward-coin").click();
+            // Wait until it's open
+            setTimeout(function () {
+                if ($loginAttempts >= $maxLoginAttempts) {
+                    // Notify user to manually login
+                    GM.notification(notificationManuallyLogin);
+                } else if (isLoginModalOpen()) {
+                    // Login Modal is open, try to log in
+                    $loginAttempts++; // Increase login tries
+                    $("button.modal__button--login").click();
+                } else {
+                    // Notify user to manually login
+                    GM.notification(notificationManuallyLogin);
+                }
+            }, $waitForModalTime);
+        } else {
+            if ($loginAttempts > 0) {
+                $loginAttempts = 0;
+                GM.setValue("loginAttempts", $loginAttempts); // Reset login tries
             }
-        }, $waitForModalTime);
-    } else {
-        if ($loginAttempts > 0) {
-            $loginAttempts = 0;
-            GM.setValue("loginAttempts", $loginAttempts); // Reset login tries
         }
+
+        // Click coin
+        if (!isCoinClicked()) {
+            $("#reward-coin").click();
+        }
+
+        // Refresh page automatically
+        setTimeout(function () {
+            if ($loginAttempts > 0) {
+                GM.setValue("loginAttempts", $loginAttempts);
+            }
+            location.reload();
+        }, $autoRefreshTime);
     }
 
-    // Click coin
-    if (!isCoinClicked()) {
-        $("#reward-coin").click();
-    }
-
-    // Refresh page automatically
-    setTimeout(function () {
-        if ($loginAttempts > 0) {
-            GM.setValue("loginAttempts", $loginAttempts);
-        }
-        location.reload();
-    }, $autoRefreshTime);
+    // It takes a while to load the entire site, so lets wait 30 seconds and 
+    // then execute the actual script
+    setTimeout(function () { executeScript(); }, 30000);
 });
