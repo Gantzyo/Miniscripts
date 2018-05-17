@@ -5,10 +5,11 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @include         https://chrono.gg/*
 // @description     Try to click coin each 10 minutes
-// @version         1.2.0
+// @version         1.2.1
 // @grant           GM_notification
 // @grant           GM.notification
 // @grant           window.focus
+// @grant           window.location
 // @grant           console
 // @grant           GM_getValue
 // @grant           GM_setValue
@@ -164,8 +165,12 @@ $(document).ready(function () {
             if ($loginAttempts > 0) {
                 GM.setValue("loginAttempts", $loginAttempts);
             }
-            location.reload();
+            
+            // location.reload(); // sometines reload doesn't work
+            window.location.href = "https://chrono.gg/";
         }, $autoRefreshTime);
+        
+        
     }
 
     // It takes a while to load the entire site, so lets wait 30 seconds and 
