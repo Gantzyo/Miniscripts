@@ -4,8 +4,9 @@
 // @homepageURL     https://github.com/Gantzyo/Miniscripts/tree/master/Greasemonkey/Chrono.gg
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @include         https://chrono.gg/*
+// @include         https://www.chrono.gg/*
 // @description     Try to click coin each 10 minutes
-// @version         1.2.1
+// @version         1.2.2
 // @grant           GM_notification
 // @grant           GM.notification
 // @grant           window.focus
