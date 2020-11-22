@@ -5,9 +5,8 @@
 // @supportURL      https://github.com/Gantzyo/Miniscripts/issues
 // @downloadURL     https://github.com/Gantzyo/Miniscripts/raw/master/Greasemonkey/srrDB/srrDB_ArchivedFilesSFV.user.js
 // @include         https://www.srrdb.com/release/details/*
-// @version         1.2.0
+// @version         1.2.1
 // @grant           none
-// @require         https://code.jquery.com/jquery-3.1.1.min.js
 // ==/UserScript==
 
 // Useful documentation for creating files from javascript:
@@ -52,7 +51,7 @@ $(document).ready(function () {
 
     // -------------- GET RELEASE DATA
     var $releaseName = $("#release-name").val();
-    var $archivedFilesLabel = $("td:contains('Archived files')");
+    var $archivedFilesLabel = $("td").filter(function() {return /.*Archived\s+files.*/.test($(this).text())});
     var $archivedFilesTable = $archivedFilesLabel.next(".subhover").find("table > tbody");
     var $files = $archivedFilesTable.find("tr");
     var $generatedString = "";
